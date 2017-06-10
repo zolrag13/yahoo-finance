@@ -30,7 +30,21 @@ Passing `raw: false` will return numerical values
 ```ruby
 yahoo_client = YahooFinance::Client.new
 data = yahoo_client.quotes(["BVSP", "NATU3.SA", "USDJPY=X"], [:ask, :bid, :last_trade_date], { raw: false } )
-data[0].ask # This is now a float
+data[0].ask # This is now a BigDecimal
+```
+
+Passing `na_as_nil: true` will convert "N/A" responses to `nil`
+
+```ruby
+yahoo_client = YahooFinance::Client.new
+
+data = yahoo_client.quotes(["BVSP"], [:ask] )
+data[0].ask
+> "N/A"
+
+data = yahoo_client.quotes(["BVSP"], [:ask], { na_as_nil: true } )
+data[0].ask
+> nil
 ```
 
 The full list of fields follows:
@@ -113,6 +127,8 @@ The full list of fields follows:
      :price_paid 
      :price_per_book 
      :price_per_sales 
+     :revenue
+     :shares_outstanding
      :shares_owned 
      :short_ratio 
      :stock_exchange 
@@ -187,6 +203,3 @@ data[0].after  # 7
 
 
 Enjoy! :-)
-
-- Herval (hervalfreire@gmail.com)
-- Eric D. Santos Sosa (eric.santos@cometa.works)
