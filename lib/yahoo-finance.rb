@@ -172,7 +172,9 @@ module YahooFinance
         current_end_date = [current_date + time_from_days(days_per_page), end_date.to_time.to_i].min
         params[:period2] = current_end_date
         url = "https://finance.yahoo.com/quote/#{URI.escape(symbol)}/history/?#{params.map{|k, v| "#{k}=#{v}"}.join("&")}"
+        puts url
         data << read_historical(symbol, url)
+        puts data.size
         current_date = current_end_date + time_from_days(1)
       end
       data.uniq.flatten
