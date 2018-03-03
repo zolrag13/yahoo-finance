@@ -58,7 +58,7 @@ module YahooFinance
       companies(country, markets).map { |c| Industry.new(c.sector, c.industry) }.uniq
     end
 
-    SYMBOL_CHANGE_URL = "http://www.nasdaq.com/markets/stocks/symbol-change-history.aspx"
+    SYMBOL_CHANGE_URL = "https://www.nasdaq.com/markets/stocks/symbol-change-history.aspx"
 
     SORT_BY = [
       'EFFECTIVE',
